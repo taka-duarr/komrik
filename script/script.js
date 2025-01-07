@@ -117,7 +117,8 @@ function updateChart(futureYears = [], futurePrices = []) {
                         fill: false,
                         pointRadius: 5,
                         pointHoverRadius: 7,
-                        borderWidth: 2
+                        borderWidth: 2,
+                        tension: 0.4
                     },
                     {
                         label: 'Prediksi Harga',
@@ -127,7 +128,8 @@ function updateChart(futureYears = [], futurePrices = []) {
                         fill: false,
                         pointRadius: 5,
                         pointHoverRadius: 7,
-                        borderWidth: 2
+                        borderWidth: 2,
+                        tension: 0.4
                     }
                 ]
             },
