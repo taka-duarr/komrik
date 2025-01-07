@@ -34,9 +34,9 @@ function displayData() {
     const predictionsList = document.getElementById('predictions-list');
     predictionsList.innerHTML = ''; // Reset list sebelum menambahkan data
 
-    years.forEach((year, index) => {
+    years.forEach((year, index) => { // Looping untuk setiap tahun dan harga
         const li = document.createElement('tr');
-        li.innerHTML = `<td class="border px-4 py-2">${year}</td><td class="border px-4 py-2">${prices[index]}</td>`;
+        li.innerHTML = `<td class="border px-4 py-2">${year}</td><td class="border px-4 py-2">${prices[index]}</td>`; //menambah tahun dan harga ke kolom tabel
         predictionsList.appendChild(li);
     });
 }
@@ -48,8 +48,8 @@ function finishInput() {
     const futurePrices = predictPrices(futureYears);
 
     // Menambahkan hasil prediksi ke dalam tabel
-    const predictionsList = document.getElementById('predictions-list');
-    futureYears.forEach((year, index) => {
+    const predictionsList = document.getElementById('predictions-list'); // Ambil elemen tabel
+    futureYears.forEach((year, index) => { // Looping untuk setiap tahun dan harga
         const li = document.createElement('tr');
         li.innerHTML = `<td class="border px-4 py-2">${year}</td><td class="border px-4 py-2">${futurePrices[index]}</td>`;
         predictionsList.appendChild(li);
@@ -76,7 +76,7 @@ function linearRegression(X, y) {
     const meanX = X.reduce((sum, x) => sum + x[0], 0) / n;
     const meanY = y.reduce((sum, yVal) => sum + yVal, 0) / n;
 
-    const numerator = X.reduce((sum, x, i) => sum + (x[0] - meanX) * (y[i] - meanY), 0);
+    const numerator = X.reduce((sum, x, i) => sum + (x[0] - meanX) * (y[i] - meanY), 0); //sigma (x-meanX)(y-meanY)
     const denominator = X.reduce((sum, x) => sum + Math.pow(x[0] - meanX, 2), 0);
 
     const m = numerator / denominator;
@@ -85,11 +85,14 @@ function linearRegression(X, y) {
     return { m, b };
 }
 
+
+
+
 // Update chart untuk data historis dan prediksi
 function updateChart(futureYears = [], futurePrices = []) {
     const ctx = document.getElementById('priceChart').getContext('2d');
 
-    // Gabungkan data historis dengan data prediksi
+    // Gabungkan data historis dengan data prediksi 
     const allYears = years.concat(futureYears); // Gabungkan tahun historis dan prediksi
     const allPrices = prices.concat(futurePrices); // Gabungkan harga historis dan prediksi
 
@@ -130,6 +133,10 @@ function updateChart(futureYears = [], futurePrices = []) {
             },
             options: {
                 responsive: true,
+                animation: {
+                    duration: 10000, // Durasi animasi dalam milidetik
+                    easing: 'easeInOutSine' // Efek animasi
+                },
                 scales: {
                     x: {
                         title: {
@@ -148,6 +155,7 @@ function updateChart(futureYears = [], futurePrices = []) {
         });
     }
 }
+
 
 
 // Inisialisasi chart pertama kali
